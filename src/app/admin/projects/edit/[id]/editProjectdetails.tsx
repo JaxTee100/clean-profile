@@ -81,7 +81,7 @@ export default function EditProjectDetails({ projectId }: { projectId: string })
         const updatedProject = await updateProject(projectId, payload);
 
         if (updatedProject) {
-            toast.success(successMessage || "Project updated successfully");
+            toast.success("Project updated successfully");
             router.push("/admin/projects/list");
         }
         } catch (error) {
