@@ -6,7 +6,7 @@ import { useState } from "react";
 import { toast } from "sonner"
 
 export default function CreateProjectPage() {
-  const { createProject, isLoading, successMessage} = useProjectStore();
+  const { createProject, isLoading, successMessage, error} = useProjectStore();
 
   const [formData, setFormData] = useState({
     project_name: "",
@@ -62,6 +62,7 @@ export default function CreateProjectPage() {
   return (
     <main className="min-h-screen px-4 py-10 max-w-2xl mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-gray-900">Create New Project</h1>
+      {error && <p className="text-red-500 ">{error}</p>}
       <form
         onSubmit={handleSubmit}
         className="bg-white p-6 rounded-lg shadow space-y-4"
