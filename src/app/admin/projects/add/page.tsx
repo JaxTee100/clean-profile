@@ -26,7 +26,8 @@ export default function CreateProjectPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const payload = {
+    try {
+      const payload = {
       ...formData,
       technologies: formData.technologies.split(",").map((t) => t.trim()),
     };
@@ -47,6 +48,12 @@ export default function CreateProjectPage() {
       toast.success(successMessage || "Project created successfully");
       router.push("/admin/projects/list");
     }
+    } catch (error) {
+      console.log("Failed to create project:", error);
+      toast.error("Failed to create project");
+    }
+
+    
 
 
 
