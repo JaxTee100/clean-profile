@@ -78,7 +78,7 @@ export default function ProjectsPage() {
       {/* Filters + Page Size */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6">
         <div className="flex flex-wrap gap-3">
-          {categories.map((cat) => (
+          {categories && categories.map((cat) => (
             <button
               key={cat}
               onClick={() => {

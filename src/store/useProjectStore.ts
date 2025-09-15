@@ -9,6 +9,7 @@ export interface Project {
   link: string;
   category: string;
   createdAt: string;
+  updatedAt: string;
 }
 
 interface ProjectState {
@@ -18,7 +19,6 @@ interface ProjectState {
   currentPage: number;
   totalPages: number;
   totalProjects: number;
-  successMessage: string | null;
   fetchAllProjects: (params: { limit: number; offset: number }) => Promise<void>;
   createProject: (projectData: Omit<Project, "id" | "createdAt">) => Promise<Project | undefined>;
   updateProject: (id: string, projectData: Partial<Omit<Project, "id" | "createdAt">>) => Promise<Project | undefined>;
@@ -34,7 +34,6 @@ export const useProjectStore = create<ProjectState>((set) => ({
   currentPage: 1,
   totalPages: 1,
   totalProjects: 0,
-  successMessage: "",
 
   fetchAllProjects: async (params) => {
     set({ isLoading: true, error: null });
@@ -68,7 +67,7 @@ export const useProjectStore = create<ProjectState>((set) => ({
           withCredentials: true,
         }
       );
-      set({ isLoading: false, successMessage: res.data.message });
+      set({ isLoading: false});
       return res.data;
     } catch (err) {
       set({ error: "Failed to create project", isLoading: false });
@@ -86,7 +85,7 @@ export const useProjectStore = create<ProjectState>((set) => ({
           withCredentials: true,
         }
       );
-      set({ isLoading: false, successMessage: res.data.message });
+      set({ isLoading: false});
       return res.data;
     } catch (err) {
       set({ error: "Failed to update project", isLoading: false });
@@ -124,7 +123,7 @@ export const useProjectStore = create<ProjectState>((set) => ({
       const res = await axios.get(`/api/projects/${id}`, {
         withCredentials: true,
       });
-      set({ isLoading: false, successMessage: res.data.message });
+      set({ isLoading: false});
       return res.data.data;
     } catch (err) {
       set({ error: "Failed to get project", isLoading: false });

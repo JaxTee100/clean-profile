@@ -52,12 +52,15 @@ export default function ProjectsPage() {
 
   // Category list
   const categories = useMemo(() => {
-    const cats = new Set<string>(projects.map((p) => p.category || "Uncategorized"));
-    return ["All", ...Array.from(cats)];
-  }, [projects]);
+  if (!projects) return ["All"];
+  const cats = new Set<string>((projects ?? []).map((p) => p.category || "Uncategorized"));
+  return ["All", ...Array.from(cats)];
+}, [projects]);
+
 
   // Filtered list
   const filtered = useMemo(() => {
+    if (!projects) return []; 
     if (selectedCategory === "All") return projects;
     return projects.filter(
       (p) => p.category?.toLowerCase() === selectedCategory.toLowerCase()
@@ -168,7 +171,7 @@ export default function ProjectsPage() {
             </div>
           ))}
         </div>
-      ) : filtered.length === 0 ? (
+      ) : (filtered?.length ?? 0) === 0 ? (
         <p className="text-lg text-center text-gray-500 mt-20">
           No projects found.
         </p>
