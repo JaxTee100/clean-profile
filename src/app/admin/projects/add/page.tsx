@@ -6,7 +6,7 @@ import { useState } from "react";
 import { toast } from "sonner"
 
 export default function CreateProjectPage() {
-  const { createProject, isLoading, successMessage, error} = useProjectStore();
+  const { createProject, isLoading,  error} = useProjectStore();
 
   const [formData, setFormData] = useState({
     project_name: "",
@@ -45,7 +45,7 @@ export default function CreateProjectPage() {
         category: ""
       });
 
-      toast.success(successMessage || "Project created successfully");
+      toast.success("Project created successfully");
       router.push("/admin/projects/list");
     }
     } catch (error) {

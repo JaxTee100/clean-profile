@@ -20,8 +20,8 @@ interface ProjectState {
   totalPages: number;
   totalProjects: number;
   fetchAllProjects: (params: { limit: number; offset: number }) => Promise<void>;
-  createProject: (projectData: Omit<Project, "id" | "createdAt">) => Promise<Project | undefined>;
-  updateProject: (id: string, projectData: Partial<Omit<Project, "id" | "createdAt">>) => Promise<Project | undefined>;
+  createProject: (projectData: Omit<Project, "id" | "createdAt" | "updatedAt">) => Promise<Project | undefined>;
+  updateProject: (id: string, projectData: Partial<Omit<Project, "id" | "createdAt" | "updatedAt">>) => Promise<Project | undefined>;
   deleteProject: (id: string) => Promise<boolean>;
   getProjectById: (id: string) => Promise<Project | null>;
   setCurrentPage: (page: number) => void;
