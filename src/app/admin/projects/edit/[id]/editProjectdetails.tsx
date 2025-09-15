@@ -10,7 +10,6 @@ export default function EditProjectDetails({ projectId }: { projectId: string })
         isLoading,
         updateProject,
         getProjectById,
-        successMessage
     } = useProjectStore();
     const router = useRouter();
 
